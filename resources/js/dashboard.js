@@ -94,6 +94,7 @@ let editor = new EditorJS({
 getAllDocs().then(res => {
     const {data} = res.data;
     initDocsTable(data);
+    initLatestDocs(data);
 }).catch(e => {
     console.log('error: ', e);
     Swal.fire({
@@ -276,6 +277,78 @@ function initDocsTable(data) {
         }
     });
 }
+
+// Function to set document cards
+function initLatestDocs(docs) {
+    // count of doc in docs area
+    const VIEW_LATEST_DOCS_CNT = 6;
+    console.log(docs);
+
+    for(let i = 0; i < VIEW_LATEST_DOCS_CNT; i ++){
+        makeDocCard(docs[i])
+    }
+
+}
+
+// Function to make doc card and show interface
+function makeDocCard(doc) {
+    let doc_id = doc.id;
+    let doc_title = doc.title;
+    let doc_block = doc.blocks;
+    let user_name = doc.user_id;
+    // Doc card item
+    let doc_card_item = document.createElement("div");
+    doc_card_item.setAttribute("class", "docs-homescreen-templates-templateview docs-homescreen-templates-templateview-showcase docs-homescreen-itemview-disabled");
+    doc_card_item.setAttribute("id", doc_id);
+    doc_card_item.setAttribute("role", "option");
+    doc_card_item.setAttribute("tabindex", "-1");
+    doc_card_item.setAttribute("aria-disabled", "true");
+    doc_card_item.setAttribute("data-content", doc_block);
+    doc_card_item.setAttribute("onclick", "editDoc("+ doc_id +")");
+
+    let doc_card_first_child = document.createElement("div");
+    doc_card_first_child.setAttribute("class", "docs-homescreen-templates-templateview-preview docs-homescreen-templates-templateview-preview-showcase");
+    doc_card_first_child.setAttribute("aria-labelledby", ":1i");
+
+    let child_div_elm = document.createElement("div");
+    child_div_elm.setAttribute("class", "docs-homescreen-templates-templateview-preview-overlay docs-homescreen-templates-templateview-preview-showcase-overlay");
+
+    let imgElement = document.createElement("img");
+    imgElement.setAttribute("src", "https://ssl.gstatic.com/docs/templates/thumbnails/docs-blank-googlecolors.png");
+    imgElement.setAttribute("style", "visibility: visible;");
+    imgElement.setAttribute("data-nsfw-filter-status", "sfw");
+
+    doc_card_first_child.appendChild(child_div_elm);
+    doc_card_first_child.appendChild(imgElement);
+
+    let doc_card_second_child = document.createElement("div");
+    doc_card_second_child.setAttribute("class", "docs-homescreen-templates-templateview-caption");
+
+    let div_elm = document.createElement("div");
+    div_elm.setAttribute("class", "docs-homescreen-templates-templateview-metadata");
+
+    let sub_div_elm = document.createElement("div");
+    sub_div_elm.setAttribute("class", "docs-homescreen-templates-templateview-title");
+    sub_div_elm.setAttribute("title", doc_title);
+
+    
+    let doc_title_elm = document.createTextNode(doc_title);
+    let uname_div_elm = document.createElement("div");
+    uname_div_elm.setAttribute("class", "docs-homescreen-templates-templateview-style");
+    let user_name_elm = document.createTextNode(user_name);
+    uname_div_elm.appendChild(user_name_elm);
+    sub_div_elm.appendChild(doc_title_elm);
+    
+    div_elm.appendChild(sub_div_elm);
+    div_elm.appendChild(uname_div_elm);
+    doc_card_second_child.appendChild(div_elm);
+
+    doc_card_item.appendChild(doc_card_first_child);
+    doc_card_item.appendChild(doc_card_second_child);
+
+    document.getElementById("doc_card_area").appendChild(doc_card_item);
+}
+
 
 // Function to load a doc into Editor.js
 function loadDocIntoEditor(docId) {
