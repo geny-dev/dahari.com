@@ -46,6 +46,19 @@ class DocsController extends Controller
         ]);
     }
 
+    /**
+     * Get latest inserted data
+     */
+
+     public function getLatestDocs(Request $request)
+     {
+        $docs = Doc::latest()->take(6)->get();
+        return response()->json([
+            'message' => 'Documents retrieved successfully',
+            'data' => $docs,
+        ]);
+     }
+
 
     /**
      * Store a newly created resource in storage.
