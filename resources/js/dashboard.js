@@ -92,7 +92,7 @@ let editor = new EditorJS({
 
 // Initialize dataTables
 getAllDocs().then(res => {
-    const {data} = res.data;
+    const { data } = res.data;
     initDocsTable(data);
 }).catch(e => {
     console.log('error: ', e);
@@ -101,6 +101,19 @@ getAllDocs().then(res => {
         text: 'Error fetching documents',
         icon: 'error',
     });
+});
+
+// Initialize latest docs area
+getLatestDocs(null).then(res => {
+    const { data } = res.data;
+    initLatestDocs(data);
+}).catch(e => {
+    console.log('error', e);
+    Swal.fire({
+        title: 'Error!',
+        text: 'Error fetching documents',
+        icon: 'error',
+    })
 });
 
 /*
@@ -158,7 +171,7 @@ function handleSaveClick() {
             }
 
             savePromise.then(function (response) {
-                const {data} = response.data;
+                const { data } = response.data;
                 // Check if the response is 204 - No Content
                 if (response.status === 204) { // 204 - No Content
                     // Find the row index for the active document
@@ -211,7 +224,6 @@ function handleSaveClick() {
 
 // Initialize dataTables
 function initDocsTable(data) {
-    console.log('data: ', data)
     let deleteButton = `
         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded delete">
             <i class="fa-solid fa-trash-can mr-1"></i>
@@ -231,10 +243,10 @@ function initDocsTable(data) {
     $docsTable.DataTable({
         data: $data,
         columns: [
-            {data: 'id'},
-            {data: 'title'},
-            {data: 'created'},
-            {data: 'updated'},
+            { data: 'id' },
+            { data: 'title' },
+            { data: 'created' },
+            { data: 'updated' },
             {
                 data: null, // This column does not correspond to any data field
                 defaultContent: deleteButton, // Delete button
@@ -277,11 +289,115 @@ function initDocsTable(data) {
     });
 }
 
+// Function to set document cards
+function initLatestDocs(docs) {
+    // count of doc in docs area
+    const VIEW_LATEST_DOCS_CNT = 6;
+    let display_cnt = docs.length < VIEW_LATEST_DOCS_CNT ? docs.length : VIEW_LATEST_DOCS_CNT;
+
+    for(let i = 0; i < display_cnt; i ++){
+        makeDocCard(docs[i]);
+    }
+}
+
+// Function to make doc card and show interface
+function makeDocCard(doc) {
+    let doc_id = doc.id;
+    let doc_title = doc.title;
+    let doc_block = doc.blocks;
+    let user_name = doc.created_at;
+    // Doc card item
+    let doc_card_item = document.createElement("div");
+    doc_card_item.setAttribute("class", "docs-homescreen-templates-templateview docs-homescreen-templates-templateview-showcase docs-homescreen-itemview-disabled");
+    doc_card_item.setAttribute("id", doc_id);
+    doc_card_item.setAttribute("role", "option");
+    doc_card_item.setAttribute("tabindex", "-1");
+    doc_card_item.setAttribute("aria-disabled", "true");
+    doc_card_item.setAttribute("data-content", doc_block);
+    // doc_card_item.setAttribute("onclick", "editDoc("+ doc_id +")");
+
+    let doc_card_first_child = document.createElement("div");
+    doc_card_first_child.setAttribute("class", "docs-homescreen-templates-templateview-preview docs-homescreen-templates-templateview-preview-showcase");
+    doc_card_first_child.setAttribute("aria-labelledby", ":1i");
+
+    let child_div_elm = document.createElement("div");
+    child_div_elm.setAttribute("class", "docs-homescreen-templates-templateview-preview-overlay docs-homescreen-templates-templateview-preview-showcase-overlay");
+
+    let imgElement = document.createElement("img");
+    imgElement.setAttribute("src", "https://ssl.gstatic.com/docs/templates/thumbnails/docs-blank-googlecolors.png");
+    imgElement.setAttribute("style", "visibility: visible;");
+    imgElement.setAttribute("data-nsfw-filter-status", "sfw");
+    imgElement.setAttribute("data-title", doc_title);
+    imgElement.setAttribute("data-conetent", doc_block);
+    imgElement.onclick = () => {
+        editDocs(doc_id, doc_title, doc_block);
+    };
+
+    doc_card_first_child.appendChild(child_div_elm);
+    doc_card_first_child.appendChild(imgElement);
+
+    let doc_card_second_child = document.createElement("div");
+    doc_card_second_child.setAttribute("class", "docs-homescreen-templates-templateview-caption");
+
+    let div_elm = document.createElement("div");
+    div_elm.setAttribute("class", "docs-homescreen-templates-templateview-metadata");
+
+    let sub_div_elm = document.createElement("div");
+    sub_div_elm.setAttribute("class", "docs-homescreen-templates-templateview-title");
+    sub_div_elm.setAttribute("title", doc_title);
+
+
+    let doc_title_elm = document.createTextNode(doc_title);
+    let uname_div_elm = document.createElement("div");
+    uname_div_elm.setAttribute("class", "docs-homescreen-templates-templateview-style");
+    let user_name_elm = document.createTextNode(user_name);
+    uname_div_elm.appendChild(user_name_elm);
+    sub_div_elm.appendChild(doc_title_elm);
+
+    div_elm.appendChild(sub_div_elm);
+    div_elm.appendChild(uname_div_elm);
+    doc_card_second_child.appendChild(div_elm);
+
+    doc_card_item.appendChild(doc_card_first_child);
+    doc_card_item.appendChild(doc_card_second_child);
+
+    document.getElementById("doc_card_area").appendChild(doc_card_item);
+}
+
+// Function to edit existing docs
+function editDocs(doc_id, doc_title, doc_content) {
+    document.getElementById("doc-title").value = doc_title;
+    let view_data = {
+        "time": 1614073201548,
+        "blocks": [
+            {
+                "type": "header",
+                "data": {
+                    "text": doc_title,
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": doc_content,
+                }
+            },
+        ],
+        "version": "2.22.2"
+    };
+    editor.saver.save().then((savedData) => {
+        savedData.blocks = view_data.blocks;
+        editor.render(savedData);
+    });
+}
+
+
 // Function to load a doc into Editor.js
 function loadDocIntoEditor(docId) {
     // Get the document from the server
     axios.get(`/doc/${docId}`).then(res => {
-        const {data} = res.data;
+        const { data } = res.data;
         // set activeDoc
         activeDoc = data;
         // Set the title in the input field
@@ -304,7 +420,10 @@ function loadDocIntoEditor(docId) {
 function getAllDocs() {
     return axios.get('/docs');
 }
-
+// Get latest docs
+function getLatestDocs(query = "") {
+    return axios.get('/latestdocs?query=' + query);
+}
 // Delete doc
 function deleteDoc(id) {
     return axios.delete(`/doc/${id}`);

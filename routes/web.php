@@ -47,7 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/doc/{id}', [DocsController::class, 'destroy'])->name('docs.destroy');
     // Get all docs for the user
     Route::get('/docs', [DocsController::class, 'getDocs'])->name('docs.getDocs');
-
+    // Get all docs for the user
+    Route::get('/latestdocs', [DocsController::class, 'getDocs'])->name('docs.getLatestDocs');
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

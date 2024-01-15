@@ -10,20 +10,178 @@
     white-space: nowrap;
 }
 
-.docs-homescreen-templates-templateview-showcase {
-    width: 118px;
-    margin-right: 19px;
-}
+
 
 .docs-homescreen-templates-templateview {
     display: inline-block;
     margin: 0 0 24px 0;
-    vertical-align: top;
+    vertical-align: top
 }
 
-.docs-homescreen-templates-templateview-preview-showcase {
-    height: 150px;
-    width: 118px;
+.docs-grille-homescreen .docs-homescreen-templates-templateview {
+    position: relative
+}
+
+.docs-homescreen-templates-templateview-showcase {
+    margin-right: 19px
+}
+
+.docs-homescreen-templates-templateview-default {
+    margin-right: 16px
+}
+
+.docs-homescreen-templates-templateview.goog-control-focused {
+    outline: 1px solid transparent
+}
+
+.docs-homescreen-templates-templateview-showcase {
+    width: 118px
+}
+
+.docs-homescreen-templates-templateview-default {
+    width: 154px
+}
+
+@media only screen and (min-width: 1100px) {
+    .docs-homescreen-templates-templateview-showcase {
+        width: 133px
+    }
+
+    .docs-homescreen-templates-templateview-default {
+        width: 166px
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .docs-homescreen-templates-templateview-default {
+        margin-right: 24px;
+        width: 167px
+    }
+
+    .docs-homescreen-templates-templateview-showcase {
+        width: 144px
+    }
+}
+
+.docs-homescreen-templates-templateview-caption {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -moz-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -ms-flex-direction: row;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    margin: 0 4px;
+    min-height: 32px
+}
+
+.docs-homescreen-templates-templateview-metadata {
+    width: 100%;
+    min-width: 0
+}
+
+.docs-homescreen-templates-templateview-brandauthor,
+.docs-homescreen-templates-templateview-title,
+.docs-homescreen-templates-templateview-style {
+    font-size: 14px;
+    height: 19px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.docs-homescreen-templates-templateview-title {
+    color: #202124;
+    font-family: "Google Sans", Roboto, Arial, sans-serif
+}
+
+.docs-grille-homescreen .docs-homescreen-templates-templateview-title {
+    color: #1f1f1f
+}
+
+.docs-homescreen-templates-templateview-brandauthor {
+    color: #5f6368;
+    font-weight: 400
+}
+
+.docs-homescreen-templates-templateview-style {
+    color: #5f6368
+}
+
+.docs-grille-homescreen .docs-homescreen-templates-templateview-brandauthor,
+.docs-grille-homescreen .docs-homescreen-templates-templateview-style {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px
+}
+
+.docs-homescreen-templates-templateview-branding {
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.docs-homescreen-templates-templateview-title {
+    font-weight: 500
+}
+
+.docs-homescreen-templates-templateview-two-line-title {
+    display: -webkit-box;
+    height: auto;
+    min-height: 19px;
+    visibility: visible;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    word-break: break-word;
+    word-wrap: break-word
+}
+
+.docs-homescreen-templates-templateview-style {
+    font-weight: 300;
+    display: block
+}
+
+.docs-homescreen-templates-templateview-brandauthorscontainer {
+    font-weight: 300
+}
+
+.docs-homescreen-templates-templateview-brandlink:hover {
+    cursor: pointer;
+    text-decoration: underline
+}
+
+.docs-homescreen-templates-templateview-caption>.docs-homescreen-item-overflow {
+    height: 24px;
+    margin: -4px -6px 0 2px
+}
+
+.docs-homescreen-templates-templateview-addon {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 1px 6px
+}
+
+.docs-homescreen-templates-templateview-addon {
+    color: #000
+}
+
+.docs-homescreen-templates-templateview-addon {
+    background-color: #3367d6
 }
 
 .docs-homescreen-templates-templateview-preview {
@@ -35,48 +193,6 @@
     position: relative;
     margin-bottom: 10px;
     -ms-high-contrast-adjust: none;
-}
-
-.docs-homescreen-templates-templateview-preview img {
-    display: block;
-    width: 100%;
-}
-
-.docs-homescreen-templates-templateview-metadata {
-    width: 100%;
-    min-width: 0;
-}
-
-.docs-homescreen-templates-templateview-style {
-    font-weight: 300;
-    display: block;
-}
-
-.docs-homescreen-templates-templateview-style {
-    color: #5f6368;
-}
-
-.docs-homescreen-templates-templateview-title {
-    font-weight: 500;
-}
-
-.docs-homescreen-templates-templateview-title {
-    color: #202124;
-    font-family: "Google Sans", Roboto, Arial, sans-serif;
-}
-
-.docs-homescreen-templates-templateview-brandauthor,
-.docs-homescreen-templates-templateview-title,
-.docs-homescreen-templates-templateview-style {
-    font-size: 14px;
-    height: 19px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.docs-homescreen-templates-templateview-preview:focus {
-    outline: none;
 }
 
 .docs-homescreen-templates-templateview-preview:hover,
@@ -100,6 +216,7 @@
     border-radius: 9px;
     margin: 1rem auto;
 }
+
 
 /* Docs Table */
 #docs-data-table {
@@ -125,7 +242,8 @@
 }
 
 #docs-data-table tbody tr.active-row {
-    background-color: #cfcece; /* Light grey background */
+    background-color: #cfcece;
+    /* Light grey background */
     /*color: #333; !* Darker text color *!*/
 }
 
@@ -152,6 +270,7 @@
 
 /* Mobile only */
 @media (max-width: 640px) {
+
     /* smaller save and cancel */
     #editor-container #save,
     #editor-container #clear {
@@ -159,14 +278,15 @@
         padding: 0.3rem 0.5rem;
         margin: 0 auto;
     }
-    #editor-container > div > label {
+
+    #editor-container>div>label {
         display: none;
     }
+
     #editor-container #doc-title {
         width: 40%;
     }
 }
 
 /* Desktop only */
-@media (min-width: 640px) {
-}
+@media (min-width: 640px) {}

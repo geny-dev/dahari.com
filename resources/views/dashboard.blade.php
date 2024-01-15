@@ -1,12 +1,12 @@
 @push('css')
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
-    @vite('resources/css/dashboard.css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+@vite('resources/css/dashboard.css')
 @endpush
 
 @push('js')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    @vite('resources/js/dashboard.js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+@vite('resources/js/dashboard.js')
 @endpush
 
 <x-app-layout>
@@ -22,7 +22,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="docs-homescreen-item-section">
+                    <div class="docs-homescreen-item-section" id="doc_card_area">
                         <div class="docs-homescreen-templates-templateview docs-homescreen-templates-templateview-showcase docs-homescreen-itemview-disabled"
                             role="option" id=":1i" tabindex="-1" aria-disabled="true">
                             <div class="docs-homescreen-templates-templateview-preview docs-homescreen-templates-templateview-preview-showcase"
@@ -40,6 +40,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
